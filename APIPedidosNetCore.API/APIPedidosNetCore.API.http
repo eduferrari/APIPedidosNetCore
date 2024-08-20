@@ -1,0 +1,6 @@
+@APIPedidosNetCore.API_HostAddress = http://localhost:5047
+
+GET {{APIPedidosNetCore.API_HostAddress}}/
+Accept: application/json
+
+###
