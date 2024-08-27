@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\APIPedidosNetCore.Application\APIPedidosNetCore.Application.csproj" />
     <ProjectReference Include="..\APIPedidosNetCore.Domain\APIPedidosNetCore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -8,6 +8,5 @@ public interface IPedidoRepository
     Task<Pedido> BuscarPorIdAsync(int id);
     Task SalvarAsync(Pedido produto);
     Task AtualizarStatusAsync(int id, Status status);
-    Task AtualizarPagamentoAsync(int id, Status status);
     Task DeletarAsync(int id);
 }
