@@ -23,7 +23,7 @@ public class PedidoRepository : IPedidoRepository
         return await _context.Pedidos.Where(x => x.Status != Status.Deletado && x.PedidoId == id).FirstOrDefaultAsync();
     }
 
-    public async Task SalvarAsync(Pedido pedido)
+    public async Task AdicionarAsync(Pedido pedido)
     {
         await _context.Pedidos.AddAsync(pedido);
         await _context.SaveChangesAsync();
@@ -50,5 +50,10 @@ public class PedidoRepository : IPedidoRepository
             _context.Pedidos.Update(pedido);
             await _context.SaveChangesAsync();
         }
+    }
+    
+    public Task<bool> ValidaSePedidoExisteAsync(int id)
+    {
+        return Task.FromResult(ListarTodosAsync().Result.Where(x => x.PedidoId == id).Any());
     }
 }

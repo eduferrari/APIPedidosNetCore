@@ -52,7 +52,7 @@ public class UsuarioRepository : IUsuarioRepository
         }
     }
     
-    public async Task<bool> VerificaSeUsuarioJaCadastrado(string username)
+    public async Task<bool> VerificaSeUsuarioJaCadastradoAsync(string username)
     {
         return await _context.Usuarios.Where(r=> r.Email == username && r.Status != Status.Deletado).AnyAsync();
     }
