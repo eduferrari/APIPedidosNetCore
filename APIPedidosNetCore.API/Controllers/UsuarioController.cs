@@ -1,5 +1,6 @@
 ﻿using APIPedidosNetCore.Application.Interfaces;
 using APIPedidosNetCore.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIPedidosNetCore.API.Controllers;
@@ -16,18 +17,21 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<IEnumerable<Usuario>> ListarTodos()
     {
         return await _usuarioRepository.ListarTodosAsync();
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<Usuario> BuscarPorId(int id)
     {
         return await _usuarioRepository.BuscarPorIdAsync(id);
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Adicionar(Usuario usuario)
     {
         var validaUsuarioExistente = await _usuarioRepository.VerificaSeUsuarioJaCadastradoAsync(usuario.Email);
@@ -38,6 +42,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Atualizar(int id, Usuario usuario)
     {
         if (id != usuario.Id) return BadRequest();
@@ -47,6 +52,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Deletar(int id)
     {
         await _usuarioRepository.DeletarAsync(id);

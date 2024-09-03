@@ -1,5 +1,6 @@
 ﻿using APIPedidosNetCore.Application.Interfaces;
 using APIPedidosNetCore.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIPedidosNetCore.API.Controllers;
@@ -16,18 +17,21 @@ public class ClienteController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IEnumerable<Cliente>> ListarTodos()
     {
         return await _clienteRepository.ListarTodosAsync();
     }
 
     [HttpGet("{id:int}")]
+    [Authorize]
     public async Task<Cliente> BuscarPorId(int id)
     {
         return await _clienteRepository.BuscarPorIdAsync(id);
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Adicionar(Cliente cliente)
     {
         var validaUsuarioExistente = await _clienteRepository.VerificaSeClienteJaCadastradoAsync(cliente.Email);
@@ -38,6 +42,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateUser(int id, Cliente cliente)
     {
         if (id != cliente.Id) return BadRequest();
@@ -47,6 +52,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         await _clienteRepository.DeletarAsync(id);

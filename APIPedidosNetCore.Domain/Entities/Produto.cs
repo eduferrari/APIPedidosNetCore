@@ -11,7 +11,7 @@ public class Produto
     [MaxLength(90)]
     public string Nome { get; set; }
     [Required]
-    [MaxLength(500)]
+    [MaxLength(50000)]
     public string Descricao { get; set; }
     [Required]
     [Precision(14, 2)]
