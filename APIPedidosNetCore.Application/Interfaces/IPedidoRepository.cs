@@ -6,7 +6,8 @@ public interface IPedidoRepository
 {
     Task<IEnumerable<Pedido>> ListarTodosAsync();
     Task<Pedido> BuscarPorIdAsync(int id);
-    Task SalvarAsync(Pedido produto);
+    Task AdicionarAsync(Pedido produto);
     Task AtualizarStatusAsync(int id, Status status);
     Task DeletarAsync(int id);
+    Task<bool> ValidaSePedidoExisteAsync(int id);
 }

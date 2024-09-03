@@ -35,6 +35,11 @@ public class ClienteRepository : IClienteRepository
         await _context.SaveChangesAsync();
     }
 
+    public Task DeletarAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task DeletarAsync(Cliente id)
     {
         var cliente = await _context.Clientes.FindAsync(id);
@@ -45,5 +50,10 @@ public class ClienteRepository : IClienteRepository
             _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
         }
+    }
+    
+    public async Task<bool> VerificaSeClienteJaCadastradoAsync(string email)
+    {
+        return await _context.Clientes.Where(r=> r.Email == email && r.Status != Status.Deletado).AnyAsync();
     }
 }
